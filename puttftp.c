@@ -18,7 +18,6 @@ int main (int argc, char * argv[]){
 	
    //printf("Hello %s %s %s", argv[0], argv[1], argv[2]);
    
-   /*
    // This is an example code from the manual
    
    int                      sfd, s;
@@ -56,6 +55,7 @@ int main (int argc, char * argv[]){
 		   continue;
 
 	   if (bind(sfd, rp->ai_addr, rp->ai_addrlen) == 0)
+		printf("Success\n\r");
 		   break;                  // Success 
 
 	   close(sfd);
@@ -67,41 +67,6 @@ int main (int argc, char * argv[]){
 	   fprintf(stderr, "Could not bind\n");
 	   exit(EXIT_FAILURE);
    }
-
-
-*/
-
-    #include <netdb.h>
-	#include <sys/socket.h>
-	#include <arpa/inet.h>
-
-	struct addrinfo hints, *res;
-	int sockfd;
-
-	memset(&hints, 0, sizeof hints);
-	hints.ai_family = AF_INET;  // IPv4
-	hints.ai_socktype = SOCK_DGRAM;  // UDP
-	
-	if (getaddrinfo("192.168.1.10", "69", &hints, &res) != 0) {
-		perror("getaddrinfo");
-		exit(1);
-	}
-
-	// res->ai_addr contains the server address
-	sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
-	if (sockfd < 0) {
-		perror("socket");
-		exit(1);
-	}
-
-
-
-
-   if (argc != 2) {
-	   fprintf(stderr, "Usage: %s port\n", argv[0]);
-	   exit(EXIT_FAILURE);
-   }
-
 
    
    
